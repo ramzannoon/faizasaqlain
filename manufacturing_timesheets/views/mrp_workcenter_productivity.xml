@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_productivity_tree_inherit" model="ir.ui.view">
+        <field name="name">mrp.workcenter.productivity.tree.view</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="inherit_id" ref="mrp.oee_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='user_id']" position="after">
+                 <field name="date"/>
+                 <field name="worked_hours"/>
+                <field name="employee_id"/>
+                <field name="workorder_id"/>
+                <field name="workingorder_id"/>
+                <field name="state"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='workcenter_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//tree/field[@name='duration']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='loss_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_time_sheet_mine_tree" model="ir.ui.view">
+        <field name="name">mrp.workcenter.productivity.tree</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="arch" type="xml">
+            <tree string="Time Sheets" editable="bottom">
+                <field name="time_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="search_view_work_center" model="ir.ui.view">
+        <field name="name">mrp.workcenter.productivity.search.view</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="inherit_id" ref="mrp.oee_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/search/filter" position="after">
+                <field name="workingorder_id"/>
+                <field name="workingorder_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Work Order" name="group_workingorder_id" context="{'group_by':'workingorder_id'}"/>
+                    <filter string="MRP" name="group_workingorder_id" context="{'group_by':'workingorder_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

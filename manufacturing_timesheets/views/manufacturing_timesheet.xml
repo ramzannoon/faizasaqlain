@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="act_time_sheet_mine">
+        <field name="name">Time Sheets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.workcenter.productivity</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+</odoo>

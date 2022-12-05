@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="manufacturing_wip_report_tree" model="ir.ui.view">
+        <field name="name">wip.reports.tree</field>
+        <field name="model">wip.reports</field>
+        <field name="arch" type="xml">
+            <tree string="WIP Report" editable="bottom" create="false" delete="false">
+                <field name="name"/>
+                <field name="origin"/>
+                <field name="lst_price"/>
+                <field name="state"/>
+                <field name="inventory_quantity"/>
+                <field name="available_quantity"/>
+                <field name="production_id"/>
+                <field name="date_planned_start"/>
+                <field name="duration_expected"/>
+                <field name="duration"/>
+                <field name="delay_days"/>
+                <field name="state_pro"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="act_wip_reports_nw">
+        <field name="name">WIP Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wip.reports</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_time_sheet_testt"
+              name="Time Sheets" parent="mrp.menu_mrp_manufacturing" action="act_time_sheet_mine"/>
+
+    <menuitem id="menu_wip_report"
+              name="WIP Report" parent="mrp.menu_mrp_manufacturing" action="act_wip_reports_nw"/>
+
+</odoo>

@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+access_wip_reports,wip.reports,model_wip_reports,,1,1,1,1
+
+access_wip_reports_line,wip.reports.line,model_wip_reports_line,,1,1,1,1
+
+access_fs_sale_categ,fs.sale.categ,model_fs_sale_categ,,1,1,1,1
+
+
+
+
+
+
+
+
+
