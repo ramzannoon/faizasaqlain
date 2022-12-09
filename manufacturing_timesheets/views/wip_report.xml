@@ -5,7 +5,7 @@
         <field name="name">wip.reports.tree</field>
         <field name="model">wip.reports</field>
         <field name="arch" type="xml">
-            <tree string="WIP Report" editable="bottom" create="false" delete="false">
+            <tree string="WIP Report" editable="bottom" create="false" >
                 <field name="name"/>
                 <field name="origin"/>
                 <field name="lst_price"/>

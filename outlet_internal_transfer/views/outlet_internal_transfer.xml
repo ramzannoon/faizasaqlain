@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Loan Tree view-->
+    <record id="outlet_internal_transfer_tree_view" model="ir.ui.view">
+        <field name="name">outlet.internal.transfer.tree</field>
+        <field name="model">outlet.internal.transfer</field>
+        <field name="arch" type="xml">
+            <tree string="Outlet Internal Transfer Request">
+                <field name="from_shop_id"/>
+                <field name="date"/>
+                <field name="to_shop_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Loan Form view-->
+    <record id="outlet_internal_transfer_form_view" model="ir.ui.view">
+        <field name="name">outlet.internal.transfer.form</field>
+        <field name="model">outlet.internal.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Outlet Request">
+                <header>
+                    <button name="action_approve" type="object" string="Approve" states="draft"
+                            class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="draft"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approve"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_shop_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="to_shop_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Outlet Internal">
+                            <field name="outlet_internal_lines">
+                                <tree string="Outlet Internal" editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="on_hand_quantity"/>
+                                     <field name="outlet_internal_transfer_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_outlet_internal_transfer" model="ir.actions.act_window">
+        <field name="name">Outlet Internal Transfer</field>
+        <field name="res_model">outlet.internal.transfer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create Outlet Internal Transfer request.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Outlet "
+              id="menu_outlet_pos"
+              parent="point_of_sale.menu_point_root"
+              sequence="1"/>
+
+    <menuitem name="Outlet Internal Transfer"
+              parent="menu_outlet_pos"
+              id="menu_outlet_internal_transfer"
+              action="action_outlet_internal_transfer"/>
+
+</odoo>

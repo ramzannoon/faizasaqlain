@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_mrp_routing_workcenter_form" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.form</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group/group/field[@name='name']" position="after">
+                <field name="rate_per_hour"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_mrp_bom_form" model="ir.ui.view">
+        <field name="name">mrp.bom.form</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form/sheet/notebook/page[2]/field[@name='operation_ids']" position="replace">
+                <field name="operation_ids">
+                    <tree string="POS Sale Targets">
+<!--                        editable="bottom"-->
+                        <field name="name"/>
+                        <field name="quality_point_count"/>
+<!--                        <field name="workcenter_id" context="{'default_company_id': company_id}"/>-->
+                        <field name="rate_per_hour"/>
+                        <field name="time_cycle"/>
+                    </tree>
+                </field>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="view_pos_sale_targets_tree" model="ir.ui.view">
+        <field name="name">pos.sale.targets.tree</field>
+        <field name="model">pos.sale.targets</field>
+        <field name="arch" type="xml">
+            <tree string="POS Sale Targets">
+                <field name="sale_person"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="sale_target"/>
+                <field name="amount_paid"/>
+                <field name="commission"/>
+                <!--                <field name="commsion_amount"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_sale_targets_form" model="ir.ui.view">
+        <field name="name">pos.sale.targets.form</field>
+        <field name="model">pos.sale.targets</field>
+        <field name="arch" type="xml">
+            <form string="POS Sale Targets">
+                <header>
+                    <button name="action_draft" string="Draft" type='object' class="oe_highlight"
+                            attrs="{'invisible':[('state','=','posted')]}"/>
+
+                    <button name="action_posted" string="Posted" type='object' class="oe_highlight"
+                            attrs="{'invisible':[('state','=','cancel')]}"/>
+
+                    <button name="action_cancel" string="Cancel" class="oe_highlight"
+                            type='object'/>
+
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="posted,cancel,draft"
+                           statusbar_colors='{"posted":"red","draft":"red"}'/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class=" oe_stat_button" name="button_sale_targets"
+                                type="object" string="Actual Sale" icon="fa-cubes">
+                        </button>
+                    </div>
+                    <separator string="POS Sale Targets"/>
+                    <group>
+                        <group>
+                            <field name="sale_person"/>
+                            <field name="date_from"/>
+                            <field name="sale_target"/>
+                            <field name="commission"/>
+                        </group>
+                        <group>
+                            <field name="amount_paid"/>
+                            <field name="date_to"/>
+                            <!--                            <field name="commsion_amount"/>-->
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_pos_sale_targets" model="ir.actions.act_window">
+        <field name="name">Sale Targets</field>
+        <field name="res_model">pos.sale.targets</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_pos_sale_targets" name="POS Sale Targets" parent="point_of_sale.menu_point_of_sale" sequence="9"
+              action="action_pos_sale_targets"/>
+
+</odoo>

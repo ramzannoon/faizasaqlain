@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
         <field name="arch" type="xml">
             <field name="duration" position="after">
-                <field name="employee_id" invisible='1'/>
+                <field name="employee_id"/>
                 <field name="date_planned_start"/>
                 <field name="date_planned_finished"/>
             </field>
@@ -20,8 +20,8 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
         <field name="arch" type="xml">
             <xpath expr="//tree/field[@name='user_id']" position="after">
-                <field name="employee_id" invisible='1' />
-                <field name="test_timesheet" />
+                <field name="employee_id"/>
+                <field name="test_timesheet"/>
             </xpath>
         </field>
     </record>

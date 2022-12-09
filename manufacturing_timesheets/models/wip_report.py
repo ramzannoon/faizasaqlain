@@ -8,19 +8,20 @@ class WIPTimeSheetProductin(models.Model):
     sale_order = fields.Many2one('sale.order',string='Sale')
     sale_category = fields.Many2one('fs.sale.categ',string='Sale category')
     name = fields.Char(string='Work Order')
-    delay_days = fields.Char(string='Delay Days(Days)')
+    delay_days = fields.Char(string='Delay Days(hours)')
     origin = fields.Char(string='Sale Order')
     workcenter_id = fields.Many2one('mrp.workcenter')
+    workorder_id = fields.Many2one('mrp.workorder', string='Workorder')
     # production_id = fields.Char(string='Product')
     production_id = fields.Many2one('mrp.production', string='Manufacturing Order')
     date_planned_start = fields.Datetime(string="Expected Date", )
-    duration = fields.Char(string="Duration(Minutes")
-    duration_expected = fields.Char(string="Duration Expected(Minutes)")
-    date_planned_start = fields.Datetime(string="Expected(Minutes)")
+    duration = fields.Char(string="Duration(hours")
+    duration_expected = fields.Char(string="Duration Expected(hours)")
+    date_planned_start = fields.Datetime(string="Expected(hours)")
     date_planned_finished = fields.Datetime(string="Expected Date End")
     state = fields.Selection(
         [('draft', 'Draft'), ('confirmed', 'Confirmed'), ('progress', 'In Progress'), ('to_close', 'To Close'),
-         ('done', 'Done'), ('cancel', 'Cancelled')], string='State',
+         ('done', 'Done'), ('cancel', 'Cancelled')], string='MO Status',
         copy=False, index=True, readonly=True, store=True, tracking=True,
        )
     employee_id = fields.Many2one('hr.employee', "Employee")
@@ -30,7 +31,7 @@ class WIPTimeSheetProductin(models.Model):
     available_quantity = fields.Char(string="Actual Cost")
     state_pro = fields.Selection(
         [('pending', 'Pending'), ('ready', 'Ready'), ('progress', 'In Progress'), ('done', 'Finish'),
-      ('cancel', 'Cancelled')], string='State',
+      ('cancel', 'Cancelled')], string='WO Status',
         copy=False, index=True, readonly=True, store=True, tracking=True,
     )
 
