@@ -41,29 +41,22 @@ class ManufacturingTimesheetsWkOdr(models.Model):
 
         rate_po = 0
         for line in res.production_id.bom_id.operation_ids:
-            print(line,11111111111111111)
             if line.name == res.name:
-                print(line,res, 22222222222222)
                 rate_po = round(((float(line.rate_per_hour) * float(line.time_cycle))))
-                print(rate_po, 333333333333333333333)
-
         rate_po = rate_po * res.production_id.product_qty
-        print(rate_po, 4444444444444444444)
 
         self.env['wip.reports'].create({
             'origin': res.production_id.origin,
             "production_id": res.production_id.id,
             "lst_price": res.product_id.lst_price,
             'workorder_id': res.id,
-
             "inventory_quantity": rate_po,
-            # "available_quantity": res.actual_duration /60,
 
             'date_planned_start': res.date_planned_start,
             'date_planned_finished': res.date_planned_finished,
             'workcenter_id': res.workcenter_id.id,
             'duration_expected': res.duration_expected,
-            'duration': res.duration,
+            'duration': res.duration / 60,
             'state_pro': res.state,
             'delay_days': round(((float(res.duration_expected) - float(res.duration)) / 1440), 2),
             'name': res.name,

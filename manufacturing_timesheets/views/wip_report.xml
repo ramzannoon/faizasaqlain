@@ -34,6 +34,6 @@
               name="Time Sheets" parent="mrp.menu_mrp_manufacturing" action="act_time_sheet_mine"/>
 
     <menuitem id="menu_wip_report"
-              name="WIP Report" parent="mrp.menu_mrp_manufacturing" action="act_wip_reports_nw"/>
+              name="WIP Report" parent="mrp.menu_mrp_reporting" action="act_wip_reports_nw"/>
 
 </odoo>

@@ -19,8 +19,6 @@
         'views/mrp_workorder.xml',
         'views/sale_order_category.xml',
         'views/wip_report.xml',
-        'views/website_sale_practice.xml',
-
 
     ]
 }

@@ -18,8 +18,11 @@ class MRPWorkcenterProductivit(models.Model):
         ('done', 'Finished'),
         ('cancel', 'Cancelled')], string='Status',
         default='pending', copy=False, readonly=True)
+    duration_in_hours = fields.Float(string='Duration in Hours', compute='compute_duration')
 
-    # @api.onchange('duration')
-    # def onchange_duration(self):
-    #     for rec in self:
-    #          rec.workorder_id.actual_duration = rec.duration
+    def compute_duration(self):
+        for rec in self:
+            print(rec,111111111111)
+            rec.duration_in_hours = rec.duration / 60
+            print(rec,2222222222222)
+

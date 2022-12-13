@@ -22,10 +22,10 @@
             <xpath expr="//form/sheet/notebook/page[2]/field[@name='operation_ids']" position="replace">
                 <field name="operation_ids">
                     <tree string="POS Sale Targets">
-<!--                        editable="bottom"-->
+                        <!--                        editable="bottom"-->
                         <field name="name"/>
                         <field name="quality_point_count"/>
-<!--                        <field name="workcenter_id" context="{'default_company_id': company_id}"/>-->
+                        <field name="workcenter_id"/>
                         <field name="rate_per_hour"/>
                         <field name="time_cycle"/>
                     </tree>
@@ -60,20 +60,22 @@
                 <header>
                     <button name="action_draft" string="Draft" type='object' class="oe_highlight"
                             attrs="{'invisible':[('state','=','posted')]}"/>
-
                     <button name="action_posted" string="Posted" type='object' class="oe_highlight"
                             attrs="{'invisible':[('state','=','cancel')]}"/>
-
                     <button name="action_cancel" string="Cancel" class="oe_highlight"
                             type='object'/>
-
                     <field name="state" widget="statusbar" nolabel="1" statusbar_visible="posted,cancel,draft"
                            statusbar_colors='{"posted":"red","draft":"red"}'/>
                 </header>
+
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button class=" oe_stat_button" name="button_sale_targets"
                                 type="object" string="Actual Sale" icon="fa-cubes">
+                        </button>
+
+                        <button class=" oe_stat_button" name="button_journal_entry"
+                                type="object" icon="fa-calendar" string="Journal Entry">
                         </button>
                     </div>
                     <separator string="POS Sale Targets"/>
@@ -83,11 +85,15 @@
                             <field name="date_from"/>
                             <field name="sale_target"/>
                             <field name="commission"/>
+                            <field name="journal_id"/>
+                            <field name="actual_amount"/>
                         </group>
                         <group>
                             <field name="amount_paid"/>
                             <field name="date_to"/>
-                            <!--                            <field name="commsion_amount"/>-->
+
+                            <field name="debit_invoice_id"/>
+                            <field name="credit_invoice_id"/>
                         </group>
                     </group>
                 </sheet>
