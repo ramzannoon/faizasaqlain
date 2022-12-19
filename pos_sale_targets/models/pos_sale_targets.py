@@ -103,7 +103,7 @@ class POSSaleTargets(models.Model):
         }
 
 
-class MRPWorkCenterRout(models.Model):
-    _inherit = 'mrp.routing.workcenter'
-
-    rate_per_hour = fields.Float(string='Rate Per Hour')
+# class MRPWorkCenterRout(models.Model):
+#     _inherit = 'mrp.routing.workcenter'
+#
+#     rate_per_hour = fields.Float(string='Rate Per Hour')

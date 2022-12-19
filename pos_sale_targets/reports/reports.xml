@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="paperformat_pos_sale_targets_report" model="report.paperformat">
+        <field name="name">Format Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">55</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="pos_sale_targets_report" string="Pos Sale Targets Report"
+            model="pos.sale.targets" report_type="qweb-pdf"
+            file="pos_sale_targets.pos_sale_targets_template"
+            name="pos_sale_targets.pos_sale_targets_template" menu="True"
+            paperformat="pos_sale_targets.paperformat_pos_sale_targets_report"/>
+
+
+    <record id="paperformat_goods_receive_notes" model="report.paperformat">
+        <field name="name">Format Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="pos_sale_targets_report" string="Good Receive Notes Report"
+            model="pos.sale.targets" report_type="qweb-pdf"
+            file="pos_sale_targets.goods_receive_notes_template"
+            name="pos_sale_targets.goods_receive_notes_template" menu="True"
+            paperformat="pos_sale_targets.paperformat_goods_receive_notes"/>
+</odoo>

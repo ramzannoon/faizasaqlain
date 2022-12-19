@@ -1,0 +1,27 @@
+<odoo>
+
+    <record id="paperformat_outlet_wise_report" model="report.paperformat">
+        <field name="name">Format Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">55</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="outlet_wise_report" string="Outlet Wise Report"
+            model="product.purchasing.request" report_type="qweb-pdf"
+            file="material_purchase_requisitions.purchase_requisition"
+            name="material_purchase_requisitions.purchase_requisition" menu="True"
+            paperformat="material_purchase_requisitions.paperformat_purchase_requisition_new"
+
+    />
+</odoo>

@@ -15,8 +15,9 @@ class WIPTimeSheetProductin(models.Model):
     # production_id = fields.Char(string='Product')
     production_id = fields.Many2one('mrp.production', string='Manufacturing Order')
     date_planned_start = fields.Datetime(string="Expected Date", )
-    duration = fields.Char(string="Duration(hours")
+    duration = fields.Char(string="Actual Duration(hours)")
     duration_expected = fields.Char(string="Duration Expected(hours)")
+
     date_planned_start = fields.Datetime(string="Expected(hours)")
     date_planned_finished = fields.Datetime(string="Expected Date End")
     state = fields.Selection(
@@ -25,10 +26,13 @@ class WIPTimeSheetProductin(models.Model):
         copy=False, index=True, readonly=True, store=True, tracking=True,
        )
     employee_id = fields.Many2one('hr.employee', "Employee")
-    lst_price = fields.Char('Sale price')
+
     sale_order_id = fields.Char(string="Sale Order")
-    inventory_quantity = fields.Char(string="Expected Cost")
-    available_quantity = fields.Char(string="Actual Cost")
+
+    lst_price = fields.Float(string='Sale price')
+    inventory_quantity  = fields.Float(string="Expected Cost")
+    available_quantity = fields.Float(string="Actual Cost")
+
     state_pro = fields.Selection(
         [('pending', 'Pending'), ('ready', 'Ready'), ('progress', 'In Progress'), ('done', 'Finish'),
       ('cancel', 'Cancelled')], string='WO Status',

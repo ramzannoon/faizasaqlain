@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ser_action_create_bill" model="ir.actions.server">
+            <field name="name">Action create bill</field>
+            <field name="model_id" ref="model_mrp_workcenter_productivity"/>
+            <field name="binding_model_id" ref="model_mrp_workcenter_productivity"/>
+<!--            <field name="binding_view_types">list</field>-->
+            <field name="state">code</field>
+            <field name="code">
+                action = model.action_create_bill()
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="pos_sale_targets_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <style>
+                        table{
+                        width: 100%;
+                        }
+                        div{
+                        margin-top:2px
+                        }
+                        table.border th {
+                        padding: 5px;
+                        }
+                        table.border td{
+                        padding: 5px;
+                        }
+                    </style>
+                    <div class="page">
+                        <div>
+                            <h1 style="text-align:center;">
+                                <center>
+                                    <span style="border: 2px solid black;">Sale Target Report</span>
+                                </center>
+                            </h1>
+                        </div>
+
+                        <br></br>
+                        <br></br>
+
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 12%">
+                                    Sale Person :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.sale_person.name"/>
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    To Shop :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.date_from"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 12%">
+                                    Sale Target :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.sale_target"/>
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    Commision :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.commission"/>
+                                </td>
+                            </tr>
+
+                                 <tr>
+                                <td style="width: 12%">
+                                    Journals :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.journal_id.name"/>
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    Actual Amount :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.actual_amount"/>
+                                </td>
+                            </tr>
+
+                              <tr>
+                                <td style="width: 12%">
+                                    Amount paid :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.amount_paid"/>
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    To Shop :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.actual_amount"/>
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <td style="width: 12%">
+                                    Date :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.date_to"/>
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    Debit :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.debit_invoice_id"/>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <!--                        <div>-->
+                        <!--                            <table>-->
+                        <!--                                <tr class="text-center">-->
+                        <!--                                    <th style="width:10%; border:1px solid black;">Sr:#</th>-->
+                        <!--                                    <th style="width:30%; border:1px solid black;">Product</th>-->
+                        <!--                                    <th style="width:15%; border:1px solid black;">Quantity.</th>-->
+                        <!--                                    <th style="width:15%; border:1px solid black;">On hand Quantity</th>-->
+                        <!--                                </tr>-->
+                        <!--                                <t t-set="sr_no" t-value="0"/>-->
+                        <!--                                <t t-foreach="doc.outlet_internal_lines" t-as="line">-->
+                        <!--                                    <tr>-->
+                        <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                        <!--                                            <span t-esc="sr_no+1"/>-->
+                        <!--                                        </td>-->
+                        <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                        <!--                                            <span t-esc="line.product_id.name"/>-->
+                        <!--                                        </td>-->
+                        <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                        <!--                                            <span t-esc="line.quantity"/>-->
+                        <!--                                        </td>-->
+                        <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                        <!--                                            <span t-esc="line.on_hand_quantity"/>-->
+                        <!--                                        </td>-->
+
+                        <!--                                    </tr>-->
+                        <!--                                </t>-->
+
+                        <!--                            </table>-->
+                        <!--                        </div>-->
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

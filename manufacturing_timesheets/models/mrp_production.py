@@ -8,11 +8,11 @@ class ManufacturingTimesheetProduction(models.Model):
 
     def button_manufacturing_timesheets(self):
         return {
-                'name': 'Manufacturing Timesheets',
-                'view_mode': 'tree,form',
-                'res_model': 'account.analytic.line',
-                'type': 'ir.actions.act_window',
-            }
+            'name': 'Manufacturing Timesheets',
+            'view_mode': 'tree,form',
+            'res_model': 'account.analytic.line',
+            'type': 'ir.actions.act_window',
+        }
 
 
 class ManufacturingTimesheetsWkOdr(models.Model):
@@ -34,11 +34,9 @@ class ManufacturingTimesheetsWkOdr(models.Model):
             wip = self.env['wip.reports'].search([('workorder_id', '=', rec.id)])
             wip.available_quantity = duration / 60
 
-
     @api.model
     def create(self, values):
         res = super(ManufacturingTimesheetsWkOdr, self).create(values)
-
         rate_po = 0
         for line in res.production_id.bom_id.operation_ids:
             if line.name == res.name:
@@ -51,7 +49,6 @@ class ManufacturingTimesheetsWkOdr(models.Model):
             "lst_price": res.product_id.lst_price,
             'workorder_id': res.id,
             "inventory_quantity": rate_po,
-
             'date_planned_start': res.date_planned_start,
             'date_planned_finished': res.date_planned_finished,
             'workcenter_id': res.workcenter_id.id,
@@ -63,7 +60,3 @@ class ManufacturingTimesheetsWkOdr(models.Model):
             'state': res.production_id.state,
         })
         return res
-
-
-
-

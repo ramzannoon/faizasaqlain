@@ -13,12 +13,16 @@
     'depends': ['base', 'mrp','mrp_workorder','sale'],
     'data': [
         'security/ir.model.access.csv',
+        'data/data_workcenter.xml',
+
         'views/manufacturing_timesheet.xml',
         'views/mrp_production.xml',
         'views/mrp_workcenter_productivity.xml',
         'views/mrp_workorder.xml',
         'views/sale_order_category.xml',
         'views/wip_report.xml',
+
+        'wizard/create_bill.xml',
 
     ]
 }

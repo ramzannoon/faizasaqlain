@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="goods_receive_notes_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <style>
+                        table{
+                        width: 100%;
+                        }
+                        div{
+                        margin-top:2px
+                        }
+                        table.border th {
+                        padding: 5px;
+                        }
+                        table.border td{
+                        padding: 5px;
+                        }
+                    </style>
+                    <div class="page">
+                        <div>
+                            <h1 style="text-align:center;">
+                                <center>
+                                    <span>Goods Receive Notes Report</span>
+                                </center>
+                            </h1>
+                        </div>
+                        <hr size="1" width="100%" style="border:1px solid black; margin-left:70px; margin-top:8px"/>
+
+                        <br></br>
+
+                        <table style="width: 100%; margin-top: 20px">
+                            <tr style="width: 30%;height: 100%; ">
+                                <td style="width: 15%">
+                                    Date
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 20%">
+                                    <!--                                    <span t-esc="data['amount_in_words']"/>-->
+                                </td>
+                                <td style="width: 10%"></td>
+                                <td style="border: 1px solid black; center-align:15px;width: 55%;height: 100%; padding-bottom:15px;center-align:15px;padding-top:15px;">
+                                    PO Barcode
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%; margin-top: 20px">
+                            <tr>
+                                <td style="width: 20%">
+                                    Purchase Order No
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 25%">
+                                    <!--                                    <span t-esc="data['amount_in_words']"/>-->
+                                </td>
+                                <td style="width: 65%;">
+                                </td>
+                            </tr>
+
+                            <tr style="width: 30%;height: 30%;margin-top: 20px">
+                                <td style="width: 10%">
+                                    Courier no
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 25%">
+                                    <!--                                    <span t-esc="data['amount_in_words']"/>-->
+                                </td>
+                                <td style="width: 65%;">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%; margin-top: 35px">
+                            <tr>
+                                <td style="width: 10%">
+                                    Pallet
+                                </td>
+
+                                <td style="border: 1px solid black; width: 10%; left-align:15px;">
+                                </td>
+
+                                <td style="width: 10%">
+                                </td>
+
+                                <td style="width: 10%">
+                                    Boxes
+                                </td>
+
+                                <td style="border: 1px solid black; width: 10%; left-align:15px;">
+                                </td>
+                                <td style="width: 50%">
+                                </td>
+
+                            </tr>
+                        </table>
+
+
+                        <table style="width: 100%; margin-top: 30px">
+                            <tr style="width: 30%;height: 30%; margin-top: 30px">
+                                <td style="width:5%">1
+                                </td>
+                                <td style="width: 15%">
+                                    Tracking No
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 20%">
+                                    <!--                                    <span t-esc="data['amount_in_words']"/>-->
+                                </td>
+                                <td style="width: 10%"></td>
+                                <td style="border: 1px solid black;center-align:15px; width: 55%;height: 100%; padding-bottom:15px;center-align:15px;padding-top:15px;">
+                                    Tracking No Barcode
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <table style="width: 100%; margin-top: 20px">
+                            <tr style="width: 30%;height: 30%; ">
+                                <td style="width:5%">2
+                                </td>
+                                <td style="width: 15%">
+                                    Tracking No
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 20%">
+                                    <!--                                    <span t-esc="data['amount_in_words']"/>-->
+                                </td>
+                                <td style="width: 10%"></td>
+                                <td style="border: 1px solid black; width: 55%;center-align:15px;height: 100%; padding-bottom:15px;center-align:15px;padding-top:15px;">
+                                    Tracking No Barcode
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%; margin-top: 20px">
+                            <tr style="width: 30%;height: 30%;">
+                                <td style="width:5%">3
+                                </td>
+                                <td style="width: 15%">
+                                    Tracking No
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 20%">
+                                    <!--                                    <span t-esc="data['amount_in_words']"/>-->
+                                </td>
+                                <td style="width: 10%"></td>
+                                <td style="border: 1px solid black; width: 55%;height: 100%; padding-bottom:15px;center-align:15px;padding-top:15px;">
+                                    Tracking No Barcode
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="view_wip_reports_search" model="ir.ui.view">
+        <field name="name">wip.reports.search</field>
+        <field name="model">wip.reports</field>
+        <field name="priority" eval="14"/>
+        <field name="arch" type="xml">
+            <search string="Wip Reports">
+                <field name="name"/>
+                <field name="production_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Work Order" name="group_name" context="{'group_by':'name'}"/>
+                    <filter string="MRP" name="group_production_id" context="{'group_by':'production_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="production_id" icon="fa-users"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
     <record id="manufacturing_wip_report_tree" model="ir.ui.view">
         <field name="name">wip.reports.tree</field>
         <field name="model">wip.reports</field>
         <field name="arch" type="xml">
-            <tree string="WIP Report" editable="bottom" create="false" >
+            <tree string="WIP Report" editable="bottom" create="false">
                 <field name="name"/>
                 <field name="origin"/>
                 <field name="lst_price"/>
@@ -13,7 +32,6 @@
                 <field name="inventory_quantity"/>
                 <field name="available_quantity"/>
                 <field name="production_id"/>
-                <field name="date_planned_start"/>
                 <field name="duration_expected"/>
                 <field name="duration"/>
                 <field name="delay_days"/>
@@ -27,7 +45,7 @@
         <field name="name">WIP Report</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">wip.reports</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,search</field>
     </record>
 
     <menuitem id="menu_time_sheet_testt"
