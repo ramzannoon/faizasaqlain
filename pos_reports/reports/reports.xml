@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_periodic_sale" model="report.paperformat">
+            <field name="name">Format Check</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">25</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report id="action_periodic_sale_report_new" string="Periodic Sale Report"
+                model="pos.order" report_type="qweb-pdf"
+                file="pos_reports.periodic_sale_report_template"
+                name="pos_reports.periodic_sale_report_template" menu="True"
+                paperformat="pos_reports.paperformat_periodic_sale"/>
+
+
+
+                <!--        <record id="action_periodic_sale_report" model="ir.actions.report">-->
+        <!--            <field name="name">Periodic Sale Report</field>-->
+        <!--            <field name="model">periodic.sale.report.wizard</field>-->
+        <!--            <field name="report_type">qweb-pdf</field>-->
+        <!--            <field name="report_name">pos_reports.periodic_sale_report_template</field>-->
+        <!--            <field name="report_file">pos_reports.periodic_sale_report_template</field>-->
+        <!--            <field name="binding_model_id" ref="pos_reports.model_periodic_sale_report_wizard"/>-->
+        <!--            <field name="binding_type">report</field>-->
+        <!--            <field name="paperformat_id" ref="paperformat_periodic_sale"/>-->
+        <!--        </record>-->
+
+
+
+        <record id="paperformat_daily_sales_details" model="report.paperformat">
+            <field name="name">Format Check</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">25</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report id="action_daily_sales_details" string="Daily Sales Details"
+                model="pos.order" report_type="qweb-pdf"
+                file="pos_reports.daily_sales_details_template"
+                name="pos_reports.daily_sales_details_template" menu="True"
+                paperformat="pos_reports.paperformat_daily_sales_details"/>
+
+    </data>
+</odoo>

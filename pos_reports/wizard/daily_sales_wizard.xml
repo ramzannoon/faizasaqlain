@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_search_and_print_calendar_wizard" model="ir.ui.view">
+        <field name="name">Search and Print Calendar</field>
+        <field name="model">school.search.wizard</field>
+        <field name="arch" type="xml">
+            <form string="daily sales wizard">
+                <sheet>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="pos_config_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="school_print_calendars" string="Print Daily sales" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_search_and_print_calendar" model="ir.actions.act_window">
+        <field name="name">Daily sales wizard</field>
+        <field name="res_model">school.search.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="menu_school_search_and_print_template"
+            name="Daily sales wizard Report"
+            action="pos_reports.action_school_search_and_print_calendar"
+            parent="menu_reporting_pos"
+            sequence="70"/>
+
+</odoo>

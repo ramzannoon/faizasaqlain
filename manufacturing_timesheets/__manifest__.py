@@ -22,7 +22,7 @@
         'views/sale_order_category.xml',
         'views/wip_report.xml',
 
-        'wizard/create_bill.xml',
+        # 'wizard/create_bill.xml',
 
     ]
 }

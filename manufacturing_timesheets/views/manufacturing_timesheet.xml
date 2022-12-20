@@ -46,10 +46,12 @@
         <field name="arch" type="xml">
             <xpath expr="/search/filter" position="after">
                 <field name="workingorder_id"/>
-                <field name="workingorder_id"/>
+                <field name="employee_id"/>
+                <field name="production_id"/>
                 <group expand="0" string="Group By">
                     <filter string="Work Order" name="group_workingorder_id" context="{'group_by':'workingorder_id'}"/>
-                    <filter string="MRP" name="group_workingorder_id" context="{'group_by':'workingorder_id'}"/>
+                    <filter string="MRP" name="group_production_id" context="{'group_by':'production_id'}"/>
+                    <filter string="Partner" name="group_employee_id" context="{'group_by':'employee_id'}"/>
                 </group>
             </xpath>
         </field>
@@ -58,6 +60,8 @@
     <record model="ir.actions.act_window" id="act_time_sheet_mine">
         <field name="name">Time Sheets</field>
         <field name="type">ir.actions.act_window</field>
+        <field name="context">{'search_default_group_production_id': 1, 'search_default_group_workingorder_id': 1, 'search_default_group_employee_id': 1}
+        </field>
         <field name="res_model">mrp.workcenter.productivity</field>
         <field name="view_mode">tree</field>
     </record>

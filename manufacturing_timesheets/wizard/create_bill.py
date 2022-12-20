@@ -15,11 +15,6 @@ class CreateBillWizard(models.TransientModel):
     production_ids = fields.Many2many('product.product', string='Products')
 
 
-
-     # head_branch=fields.Many2one('head.branch', string='Head/Branch', index=True, ondelete='cascade', default=_default_head_branch)
-
-
-
     def add_action_create_bill(self):
         production_order = ' '
         sum_production_quantity = 0.0

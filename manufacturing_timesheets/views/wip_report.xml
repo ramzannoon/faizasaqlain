@@ -9,6 +9,7 @@
             <search string="Wip Reports">
                 <field name="name"/>
                 <field name="production_id"/>
+
                 <group expand="0" string="Group By">
                     <filter string="Work Order" name="group_name" context="{'group_by':'name'}"/>
                     <filter string="MRP" name="group_production_id" context="{'group_by':'production_id'}"/>
@@ -44,6 +45,8 @@
     <record model="ir.actions.act_window" id="act_wip_reports_nw">
         <field name="name">WIP Report</field>
         <field name="type">ir.actions.act_window</field>
+        <field name="context">{'search_default_group_production_id': 1}
+        </field>
         <field name="res_model">wip.reports</field>
         <field name="view_mode">tree,search</field>
     </record>

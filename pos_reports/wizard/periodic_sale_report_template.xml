@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_periodic_sale_report_template_wizard" model="ir.ui.view">
+        <field name="name">periodic sale report wizard Calendar</field>
+        <field name="model">periodic.sale.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Search and Print Calendar">
+                <sheet>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="user_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_periodic_sale_report_template" model="ir.actions.act_window">
+        <field name="name">Periodic Sale Wizard</field>
+        <field name="res_model">periodic.sale.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="menu_reporting_pos"
+            name="Reporting"
+            parent="menu_pos_reports"
+            sequence="100"/>
+
+    <menuitem
+            id="menu_periodic_sale_report_template"
+            name="Periodic Sale Report"
+            action="pos_reports.action_periodic_sale_report_template"
+            parent="menu_reporting_pos"
+            sequence="90"/>
+
+    <!--        <menuitem-->
+    <!--            id="menu_google_spreadsheet"-->
+    <!--            name="Google SpreadSheet"-->
+    <!--            sequence="3"-->
+    <!--            action="action_ir_attachment_google_spreadsheet"-->
+    <!--            parent="menu_pos_reports"-->
+    <!--    />-->
+
+
+</odoo>

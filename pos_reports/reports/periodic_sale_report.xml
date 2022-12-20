@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <template id="periodic_sale_report_layout">
+      <div class="header">
+            <div class="row">
+                <!--                <div class="col-12 text-center">-->
+                <span style="display:block; text-align:center; font-weight:bold; font-size: 55px"
+                      t-esc="company.name"/>
+                <!--                </div>-->
+            </div>
+        </div>
+
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <span style="display:block; text-align:center; font-weight:bold; font-size: 55px"
+                  t-esc="company.name"/>
+        </div>
+    </template>
+
+    <template id="periodic_sale_report_template">
+        <t t-call="web.html_container">
+            <!--            <t t-foreach="docs" t-as="doc">-->
+            <t t-call="pos_reports.periodic_sale_report_layout">
+                <style>
+                    div{
+                    width: 100%;
+                    margin-top: 12px;
+                    }
+                    table{
+                    width: 100%;
+                    }
+                    th{
+                    padding: 2px;
+                    }
+                    td{
+                    padding: 2px;
+                    }
+                </style>
+                <div class="page">
+                    <!--                <center>-->
+                    <!--                    <h1>English Home</h1>-->
+                    <!--                </center>-->
+                    <b>Periodic Sales Report</b>
+                    <div>
+                        <table style="width: 100%">
+                            <tr>
+                                <th style="width: 10%">
+                                    Company:
+                                </th>
+                                <td style="width: 10%">
+
+                                </td>
+                                <th style="width: 10%">
+                                    Users:
+                                </th>
+                                <th style="width: 10%">
+                                    Print Date:
+
+                                </th>
+                                <th style="width: 10%">
+
+                                </th>
+                                <th style="width: 50%">
+                                </th>
+                            </tr>
+                            <br></br>
+                            <tr>
+                                <td style="width: 10%">
+                                    <span t-esc="company.name"/>
+                                    <!--                                        <span t-field="doc.date_order"/>-->
+                                </td>
+                                <th style="width: 10%">
+                                </th>
+                                <td style="width: 10%">
+                                    <!--                                    <span t-esc="print_date"/>-->
+                                    <!--                                        <span t-field="doc.company_id"/>-->
+                                </td>
+                                <td style="width: 10%">
+                                </td>
+                                <th style="width: 70%">
+                                </th>
+                            </tr>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <tr>
+                                <th style="width: 10%">
+                                    Start date:
+                                </th>
+                                <td style="width: 10%">
+                                </td>
+                                <th style="width: 10%">
+                                    End date:
+                                </th>
+                                <th style="width: 70%">
+                                </th>
+                            </tr>
+                            <br></br>
+                            <tr>
+                                <td style="width: 10%">
+                                    <span t-esc="date_from"/>
+                                    <!--                                        <span t-field="doc.date_order"/>-->
+                                </td>
+                                <th style="width: 10%">
+
+                                </th>
+                                <td style="width: 10%">
+                                    <span t-esc="date_to"/>
+                                    <!--                                        <span t-field="doc.date_order"/>-->
+                                </td>
+                                <th style="width: 70%">
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table>
+                            <tr class="text-center" style="border:1px solid black;">
+                                <th style="width:15%;">Date:</th>
+                                <th style="width:10%;">No of Transactions</th>
+                                <th style="width:10%;">Qty</th>
+                                <th style="width:10%;">Total Sales</th>
+                                <th style="width:10%;">Total Untaxed Sales</th>
+                                <th style="width:10%;">Cost</th>
+                                <th style="width:10%;">VAT</th>
+                                <th style="width:10%;">Profit</th>
+                            </tr>
+                            <t t-set="sr_no" t-value="1"/>
+                            <t t-foreach="data" t-as="rec">
+                                <tr>
+                                    <!--                                <td class="text-center" style="border:1px solid black;">-->
+                                    <!--                                    <span t-esc="sr_no"/>-->
+                                    <!--                                </td>-->
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['date']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['no_of_transactions']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['qty']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['total_sales']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['total_untaxed']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['cost']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['vat']"/>
+                                    </td>
+                                    <td class="text-center" style="border:1px solid black;">
+                                        <span t-esc="rec['profit']"/>
+                                    </td>
+                                </tr>
+                                <!--                            <t t-set="sr_no" t-value="sr_no + 1"/>-->
+                            </t>
+                        </table>
+                        <br></br>
+                        <table style="width:100%; ">
+                            <tr style="width:100%;border:1px solid black;">
+                                <th style="width:15%;">Summary:</th>
+                                <th style="width:70%; "></th>
+                                <th style="width:15%;"></th>
+
+                            </tr>
+                            <tr style="width:100%;border:1px solid black;">
+                                <th style="width:15%; ">Total Qty :</th>
+                                <th style="width:70%; "></th>
+                                <th style="width:15%;">
+                                    <span t-esc="total_qty"/>
+                                </th>
+
+                            </tr>
+                            <tr style="width:100%;border:1px solid black;">
+                                <th style="width:15%; ">Total Vat :</th>
+                                <th style="width:70%; "></th>
+                                <th style="width:15%;">
+                                    <span t-esc="total_vat"/>
+                                </th>
+
+                            </tr>
+                            <tr style="width:100%;border:1px solid black;">
+                                <th style="width:15%; ">Total Sales:</th>
+                                <th style="width:70%;"></th>
+                                <th style="width:15%; ">
+                                    <span t-esc="total_saless"/>
+                                </th>
+                            </tr>
+                            <tr style="width:100%;border:1px solid black;">
+                                <th style="width:15%; ">Total Cost:</th>
+                                <th style="width:70%; "></th>
+                                <th style="width:15%; ">
+                                    <span t-esc="total_cost"/>
+                                </th>
+                            </tr>
+                            <tr style="width:100%;">
+                                <th style="width:15%; ">Total Profit:</th>
+                                <th style="width:70%;"></th>
+                                <th style="width:15%; ">
+                                    <span t-esc="total_profit"/>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </t>
+        </t>
+        <!--        </t>-->
+    </template>
+
+
+</odoo>

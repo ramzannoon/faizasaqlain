@@ -9,7 +9,7 @@
 <!--            <field name="binding_view_types">list</field>-->
             <field name="state">code</field>
             <field name="code">
-                action = model.action_create_bill()
+                action = records.action_create_bill()
             </field>
         </record>
 

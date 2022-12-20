@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <menuitem
+            id="menu_pos_reports"
+            name="Reports"
+            sequence="1"
+
+    />
+
+
+</odoo>

@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <data noupdate="1">
+
+        <record id="view_todays_order_trees" model="ir.ui.view">
+            <field name="name">pos.order.tree.pos.reports</field>
+            <field name="model">pos.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Today&#x2019;s Orders">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="state" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="amount_total" sum="Amount total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_yesterdays_order_trees" model="ir.ui.view">
+            <field name="name">pos.order.tree.pos.reports.yesterday</field>
+            <field name="model">pos.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Yesterday&#x2019;s Orders">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="state" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="amount_total" sum="Amount total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_last_week_order_trees" model="ir.ui.view">
+            <field name="name">pos.order.tree.pos.reports.last.week</field>
+            <field name="model">pos.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Last Week&#x2019;s Orders">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="state" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="amount_total" sum="Amount total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_current_month_order_trees" model="ir.ui.view">
+            <field name="name">pos.order.tree.pos.reports.current.month</field>
+            <field name="model">pos.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Current Month&#x2019;s Orders">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="state" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="amount_total" sum="Amount total"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="pos_dashboard_action" model="ir.actions.act_window">
+            <field name="name">Income Dashboard</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="view_todays_order_trees"/>
+            <field name="domain">[('date_order','>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                ('date_order','&lt;', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]
+            </field>
+            <!--            <field name="context">{'group_by': ['company_id','config_id']}</field>-->
+        </record>
+
+        <record id="pos_dashboard_action_yesterday" model="ir.actions.act_window">
+            <field name="name">Yesterday Orders</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="view_yesterdays_order_trees"/>
+            <field name="domain">[('date_order','>=',datetime.datetime.combine(context_today() -
+                relativedelta(days=1),datetime.time(0,0,0))), ('date_order','&lt;',datetime.datetime.combine(context_today()
+                -
+                relativedelta(days=1),datetime.time(23,59,59)))]
+            </field>
+            <!--            <field name="context">{'group_by': ['company_id','config_id']}</field>-->
+        </record>
+
+        <record id="pos_dashboard_action_last_week" model="ir.actions.act_window">
+            <field name="name">Last Week Order's</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="view_last_week_order_trees"/>
+            <field name="domain">[('date_order','>',datetime.datetime.combine(context_today() -
+                relativedelta(weeks=1),datetime.time(0,0,0))), ('date_order','&lt;',datetime.datetime.combine(context_today()
+                -
+                relativedelta(weeks=0),datetime.time(0,0,0)))]
+            </field>
+            <!--            <field name="context">{'group_by': ['company_id','config_id']}</field>-->
+        </record>
+
+        <record id="pos_dashboard_action_current_month" model="ir.actions.act_window">
+            <field name="name">Current Months Orders</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="view_current_month_order_trees"/>
+            <field name="domain">[('date_order','&lt;',(context_today()+relativedelta(months=1)).strftime('%Y-%m-01')),
+                ('date_order','>=',time.strftime('%Y-%m-01'))]
+            </field>
+            <!--            <field name="context">{'group_by': ['date_order:month', 'company_id','config_id']}</field>-->
+        </record>
+
+        <record id="dashboard_form_view" model="ir.ui.view">
+            <field name="name">Income Dashboard Form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Income Dashboard" create="0">
+                    <board style="1-1">
+                        <column style="width: 20%">
+                            <action
+                                    string="Today's Orders"
+                                    name="%(pos_dashboard_action)d"/>
+                            <action
+                                    string="Yesterday's Orders"
+                                    name="%(pos_dashboard_action_yesterday)d"/>
+                        </column>
+                        <column style="width: 20%">
+                            <action string="Last week’s Orders &amp; Income" name="%(pos_dashboard_action_last_week)d"/>
+                            <action string="Current Months Orders &amp; Income"
+                                    name="%(pos_dashboard_action_current_month)d"/>
+                            <!--                        <action-->
+                            <!--                                string="Yesterday's Orders"-->
+                            <!--                                name="%(pos_dashboard_action_yesterday)d"/>-->
+                        </column>
+
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_dashboard" model="ir.actions.act_window">
+            <field name="name">Income Dashboard</field>
+            <field name="res_model">board.board</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="pos_reports.dashboard_form_view"/>
+        </record>
+
+        <menuitem
+                name="Income Dashboard"
+                parent="pos_reports.menu_pos_reports"
+                action="pos_reports.pos_dashboard"
+                sequence="1"
+                id="menu_dashboard"/>
+
+    </data>
+</odoo>

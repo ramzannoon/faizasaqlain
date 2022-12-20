@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="company_summary_cron_new" model="ir.cron">
+        <field name="name">company_summary_cron_new</field>
+        <field name="model_id" ref="model_pos_company_analysis"/>
+        <field name="state">code</field>
+        <field name="code">model.company_pos_records()</field>
+        <!--        <field name="user_id" ref="base.user_root"/>-->
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+
+    <record id="company_pos_search" model="ir.ui.view">
+        <field name="name">pos.company.analysis.search</field>
+        <field name="model">pos.company.analysis</field>
+        <field name="arch" type="xml">
+             <search>
+                <field name="name"/>
+                <field name="qty"/>
+                <field name="order_date"/>
+                <group expand="0" string="Group By">
+                    <filter string="company" name="group_company_id" context="{'group_by':'company'}"/>
+                    <filter string="Date" name="group_order_date" context="{'group_by':'order_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="view_pos_company_analysis_tree" model="ir.ui.view">
+        <field name="name">pos.company.analysis.tree</field>
+        <field name="model">pos.company.analysis</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                 <field name="name"/>
+                <field name="qty"/>
+                <field name="order_date"/>
+                <!--                <field name="company" string="Company"/>-->
+                <!--                <field name="price_unit" string="Price"/>-->
+                <!--                <field name="pos_order_id" string="order" invisible="1"/>-->
+                <!--                <field name="unique_id" string="ID" invisible="1"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_company_analysis_action" model="ir.actions.act_window">
+        <field name="name">Company Summary</field>
+        <field name="res_model">pos.company.analysis</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_group_company_id': 1,'search_default_group_order_date': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            </p>
+        </field>
+    </record>
+
+
+    <!--    <record id="view_test_customer_company_analysis_action_two" model="ir.actions.act_window">-->
+    <!--        <field name="name">Customer Summary</field>-->
+    <!--        <field name="res_model">product.product</field>-->
+    <!--        <field name="view_mode">tree</field>-->
+    <!--        <field name="view_id" ref="zb_summary_reports.view_pos_customer_analysis_tree"/>-->
+    <!--        <field name="help" type="html">-->
+    <!--            <p class="o_view_nocontent_smiling_face">Add a Google SpreadSheet</p>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <record id="view_test_pos_company_analysis_action_two" model="ir.actions.act_window">
+        <field name="name">Product Summary</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="product.product_product_tree_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Product Summary</p>
+        </field>
+    </record>
+
+    <record id="view_sale_summary_action" model="ir.actions.act_window">
+        <field name="name">Sale Summary</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add Sale Summary</p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_customer_summary_reports"
+            name="Product Summary"
+            parent="menu_on_screen_reports"
+            action="view_test_pos_company_analysis_action_two"
+            sequence="20"/>
+
+    <menuitem
+            id="menu_company_summary_reports"
+            name="Company Summary"
+            parent="menu_on_screen_reports"
+            action="view_pos_company_analysis_action"
+            sequence="50"/>
+
+    <!--    <menuitem-->
+    <!--            id="menu_customer_summary_reports"-->
+    <!--            name="Customer Summary"-->
+    <!--            parent="menu_on_screen_reports"-->
+    <!--            action="view_test_customer_company_analysis_action_two"-->
+    <!--            sequence="22"/>-->
+
+
+</odoo>

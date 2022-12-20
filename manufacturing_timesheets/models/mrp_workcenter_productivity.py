@@ -20,55 +20,75 @@ class MRPWorkcenterProductivit(models.Model):
         default='pending', copy=False, readonly=True)
     status = fields.Selection([
         ('draft', 'Draft'),
-        ('pending', 'Pending'),
+        ('pending', 'Pending'), ('paid', 'Paid'),
         ('cancel', 'Cancelled')], string='Status',
         default='pending', copy=False, readonly=True)
     duration_in_hours = fields.Float(string='Duration in Hours', compute='compute_duration')
-    actual_cost = fields.Float(string='Actual Cost')
+    actual_cost = fields.Float(string='Actual Cost', compute='compute_actual_cost')
+
+    # def _default_vendor_bill(self):
+    #      return self.env['account.journal'].search([('name', '=', 'Vendor Bills')], limit=1).id
+
+    # journal_id = fields.Many2one('account.journal', string='Journal',  default=_default_vendor_bill)
+    date = fields.Date('Comment Date', default=date.today(), readonly=1)
+    production_ids = fields.Many2many('product.product', string='Products')
+
+    def compute_actual_cost(self):
+        print(self, 11111111111111)
+        for rec in self:
+            print(rec, 11111111111111)
+            rec.actual_cost = rec.duration
+            print(rec, 444444444444444)
 
     def action_create_bill(self):
+
         for rec in self:
-            selected_ids = rec.env.context.get('active_ids', [])
-            selected_records = rec.env['mrp.production'].browse(selected_ids)
-        return {
-            'name': ('Production Bill'),
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'create.bill.wizard',
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-        }
+            if rec.status == 'paid':
+                pass
+            product_list = []
+            product_list.append((0, 0, {
+                'name': 'Production Bill',
+                'account_id': rec.workorder_id,
+                'quantity': 1,
+                'price_unit': rec.actual_cost,
+                'partner_id': rec.employee_id.id,
+            }))
+            vals = {
+                'partner_id': rec.employee_id.id,
+                'journal_id': rec.env['account.journal'].search([('name', '=', 'Vendor Bills')], limit=1).id,
+                'invoice_date': fields.Date.today(),
+                'move_type': 'in_invoice',
+                'invoice_origin': 1,
+                'invoice_line_ids': product_list,
+                # 'state': self.write({'state': 'posted'})
+            }
+            move = self.env['account.move'].create(vals)
+            rec.status = 'paid'
 
     def compute_duration(self):
         for rec in self:
             rec.duration_in_hours = rec.duration / 60
 
 
-class MRPBOMMne(models.Model):
-    _inherit = 'mrp.bom'
-
-    @api.model
-    def create(self, values):
-        res = super(MRPWorkCenterRout, self)
-        for line in res.operation_ids:
-            self.env['mrp.workcenter.productivity'].create({
-                'actual_cost': line.rate_per_hour,
-            })
-            return res
+#
+# class MRPBOMMne(models.Model):
+#     _inherit = 'mrp.bom'
 
 
 class MRPWorkCenterRout(models.Model):
     _inherit = 'mrp.routing.workcenter'
 
-    rate_per_hour = fields.Float(string='Rate Per Hour' )
+    rate_per_hour = fields.Float(string='Rate Per Hour')
 
-
-
-        # for line in self:
-        #     self.env['mrp.workcenter.productivity'].create({
-        #         'operation_ids': [(0, 0, {
-        #             'rate_per_hour': line.rate_per_hour,
-        #         })]
-        #     })
-        #     wip_rep = super(MRPWorkCenterRout, self).cost_calculate()
-        #     return wip_rep
+    # @api.model
+    # def create(self, values):
+    #     print(self,111111111111111)
+    #     res = super(MRPWorkCenterRout, self)
+    #     print(res,222222222222222)
+    #     for line in res.operation_ids:
+    #         print(line, 3333333333333)
+    #         self.env['mrp.workcenter.productivity'].create({
+    #             'actual_cost': line.rate_per_hour,
+    #         })
+    #         print(line, 3333333333333)
+    #         return res
