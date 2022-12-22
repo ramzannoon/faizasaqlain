@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_wip_reports_search" model="ir.ui.view">
+        <field name="name">wip.reports.search</field>
+        <field name="model">wip.reports</field>
+        <field name="priority" eval="14"/>
+        <field name="arch" type="xml">
+            <search string="Wip Reports">
+                <field name="name"/>
+                <field name="production_id"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Work Order" name="group_name" context="{'group_by':'name'}"/>
+                    <filter string="MRP" name="group_production_id" context="{'group_by':'production_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="production_id" icon="fa-users"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="manufacturing_wip_report_tree" model="ir.ui.view">
+        <field name="name">wip.reports.tree</field>
+        <field name="model">wip.reports</field>
+        <field name="arch" type="xml">
+            <tree string="WIP Report" editable="bottom" create="false">
+                <field name="name"/>
+                <field name="origin"/>
+                <field name="lst_price"/>
+                <field name="state"/>
+                <field name="inventory_quantity"/>
+                <field name="available_quantity"/>
+                <field name="production_id"/>
+                <field name="duration_expected"/>
+                <field name="duration"/>
+                <field name="delay_days"/>
+                <field name="state_pro"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="act_wip_reports_nw">
+        <field name="name">WIP Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{'search_default_group_production_id': 1}
+        </field>
+        <field name="res_model">wip.reports</field>
+        <field name="view_mode">tree,search</field>
+    </record>
+
+    <menuitem id="menu_time_sheet_testt"
+              name="Time Sheets" parent="mrp.menu_mrp_manufacturing" action="act_time_sheet_mine"/>
+
+    <menuitem id="menu_wip_report"
+              name="WIP Report" parent="mrp.menu_mrp_reporting" action="act_wip_reports_nw"/>
+
+</odoo>

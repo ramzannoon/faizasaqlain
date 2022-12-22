@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fs_sale_categ_report_tree" model="ir.ui.view">
+        <field name="name">fs.sale.categ.tree</field>
+        <field name="model">fs.sale.categ</field>
+        <field name="arch" type="xml">
+            <tree string="Sale Category Report" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_fs_sale_categ_report">
+        <field name="name">Sale Category Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fs.sale.categ</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="ship_orderline">
+        <field name="model">sale.order</field>
+        <field name="name">sale.order.form</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="sale_category"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_fs_sale_categ"
+              name="Sale Category "
+              parent="sale.menu_sales_config"
+              action="act_fs_sale_categ_report"/>
+
+</odoo>
