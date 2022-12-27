@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_inhancement_report" inherit_id="account.report_invoice_with_payments">
+<!--              <xpath expr="//div[@class('page')]" position="after">-->
+<!--&lt;!&ndash;            <xpath expr="//div[hasclass('page')]" position="after">&ndash;&gt;-->
+
+<!--                <table style="width: 100%; margin-top: 20px">-->
+<!--                    <tr style="width: 30%;height: 100%; ">-->
+<!--                        <td style="width: 15%">-->
+<!--                            Date-->
+<!--                        </td>-->
+<!--                        <td style="border-bottom: 1px solid black; width: 20%">-->
+<!--                            &lt;!&ndash;                                    <span t-esc="data['amount_in_words']"/>&ndash;&gt;-->
+<!--                        </td>-->
+<!--                        <td style="width: 10%"></td>-->
+<!--                        <td style="border: 1px solid black; center-align:15px;width: 55%;height: 100%; padding-bottom:15px;center-align:15px;padding-top:15px;">-->
+<!--                            PO Barcode-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+
+<!--                &lt;!&ndash;                <t t-if="o.company_id.company_cop">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <div style="border-bottom:2px solid;height:120px;width:320px; align:left; padding-bottom:122px !important;">&ndash;&gt;-->
+<!--                &lt;!&ndash;                        <img t-att-src="image_data_uri(o.company_id.company_cop)" alt="company_cop"&ndash;&gt;-->
+<!--                &lt;!&ndash;                             style="width:auto;height:120px;"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </t>&ndash;&gt;-->
+<!--            </xpath>-->
+        </template>
+    </data>
+</odoo>
