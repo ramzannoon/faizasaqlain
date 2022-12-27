@@ -38,8 +38,11 @@ class MRPWorkcenterProductivit(models.Model):
         vendor_list = []
         record_ids = []
         for line in self:
-            vendor_list.append(line.employee_id.id)
-            record_ids.append(line.id)
+            if line.status == 'paid':
+                pass
+            else:
+                vendor_list.append(line.employee_id.id)
+                record_ids.append(line.id)
         uniq_vendor_list = set(vendor_list)
         for vendor in uniq_vendor_list:
             product_list = []
@@ -62,8 +65,12 @@ class MRPWorkcenterProductivit(models.Model):
                 'invoice_origin': '',
                 'invoice_line_ids': product_list
             }
+
             move = self.env['account.move'].create(vals)
+            if move:
+                self.write({'status': 'paid'})
             move.action_post()
+
 
 
     def compute_duration(self):
