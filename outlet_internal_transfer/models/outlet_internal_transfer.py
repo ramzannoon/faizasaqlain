@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class OutletInternalTransfer(models.Model):
@@ -9,18 +10,34 @@ class OutletInternalTransfer(models.Model):
 
     date = fields.Date(string="Date", required=True, help="Date of the Shop")
     name = fields.Char()
+    sequence = fields.Char(string='Order Reference', required=True,
+                           readonly=True, default='New')
     from_shop_id = fields.Many2one('pos.config', string="Shop From", required=True)
     to_shop_id = fields.Many2one('pos.config', string="Shop To", required=True)
 
     state = fields.Selection(
-        [('draft', 'Draft'), ('approve', 'Approve'), ('cancel', 'Cancel')],
+        [('draft', 'Draft'), ('approved', 'Approved'), ('cancelled', 'Cancelled')],
         'Status', default='draft')
     outlet_internal_lines = fields.One2many('outlet.internal.transfer.line', 'outlet_internal_transfer_id', string="Outlet Line",
                                             index=True)
 
+    # def write(self, vals):
+    #     if any(state == 'approved' for state in set(self.mapped('state'))):
+    #         raise UserError("No edit in done state")
+    #     else:
+    #         return super().write(vals)
+
+    @api.model
+    def create(self, vals):
+        if vals.get('sequence', 'New') == 'New':
+            vals['sequence'] = self.env['ir.sequence'].next_by_code(
+                'pos.sale.targets') or 'New'
+        res = super(OutletInternalTransfer, self).create(vals)
+        return res
+
     def action_approve(self):
         self.write({
-            'state': "approve"
+            'state': "approved"
         })
         picking_type_id = self.env['stock.picking.type'].search([('code', '=', "internal")], limit=1)
         print("picking type", picking_type_id.name)
@@ -46,19 +63,24 @@ class OutletInternalTransfer(models.Model):
         state_change = stock_picking_id.write({'state': 'assigned'})
         return state_change
 
-    def action_cancel(self):
+
+    def action_reset(self):
         self.write({
-            'state': "cancel"
+            'state': "draft"
         })
 
-    def button_sale_targets(self):
+    def action_cancel(self):
+        self.write({
+            'state': "cancelled"
+        })
+
+    def button_sale_internal_transfer(self):
         return {
-            'name': 'Actual Sale',
+            'name': 'Internal Transfer Sale',
             'view_mode': 'tree,form',
             'res_model': 'pos.order',
             'type': 'ir.actions.act_window',
         }
-
 
 class OutletInternalTransferLine(models.Model):
     _name = "outlet.internal.transfer.line"
@@ -66,7 +88,10 @@ class OutletInternalTransferLine(models.Model):
 
     product_id = fields.Many2one('product.product', string="Product", help="Product")
     quantity = fields.Float(string="Quantity", required=True, help="Quantity")
-    on_hand_quantity = fields.Float(string="on hand Quantity", required=True,)
+    on_hand_quantity = fields.Float(string="Available qty")
+    state = fields.Selection(
+        [('draft', 'Draft'), ('approved', 'Approved'), ('cancelled', 'Cancelled')],
+        'Status', default='draft', related='outlet_internal_transfer_id.state')
     outlet_internal_transfer_id = fields.Many2one('outlet.internal.transfer', string="Outlet Internal Transfer", help="Outlet", invisible=True)
 
     @api.onchange('product_id')

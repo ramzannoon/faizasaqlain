@@ -22,29 +22,47 @@
         <field name="arch" type="xml">
             <form string="Outlet Request">
                 <header>
-                    <button name="action_approve" type="object" string="Approve" states="draft"
+                    <!--                         <button name="action_draft" string="Draft" type='object' class="oe_highlight"-->
+                    <!--                            attrs="{'invisible':[('state','=','approved')]}"/>-->
+                    <button name="action_approve" type="object" string="Approved"
+                            class="oe_highlight" states="draft"/>
+                    <button name="action_reset" type="object" string="Reset to Draft" states="cancelled"
                             class="oe_highlight"/>
-                    <button name="action_cancel" type="object" string="Cancel" states="draft"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,approve"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="approved"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,cancelled"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class=" oe_stat_button" name="button_sale_internal_transfer"
+                                type="object" string="Internal Transfer Sale" icon="fa-cubes">
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="sequence" readonly="1"/>
+                        </h1>
+                    </div>
+
                     <group>
                         <group>
-                            <field name="from_shop_id"/>
-                            <field name="date"/>
+                            <field name="from_shop_id" create="false" delete="false"
+                                   attrs="{'readonly':[('state','=','approved')]}"/>
+                            <field name="date" attrs="{'readonly':[('state','=','approved')]}"/>
                         </group>
                         <group>
-                            <field name="to_shop_id"/>
+                            <field name="to_shop_id" create="false" delete="false"
+                                   attrs="{'readonly':[('state','=','approved')]}"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Outlet Internal">
                             <field name="outlet_internal_lines">
                                 <tree string="Outlet Internal" editable="bottom">
-                                    <field name="product_id"/>
-                                    <field name="quantity"/>
-                                    <field name="on_hand_quantity"/>
-                                     <field name="outlet_internal_transfer_id" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="product_id" create="false" delete="false"/>
+                                    <field name="quantity" attrs="{'readonly':[('state','=','approved')]}"/>
+                                    <field name="on_hand_quantity" readonly="1"/>
+                                    <field name="outlet_internal_transfer_id" invisible="1"/>
                                 </tree>
                             </field>
                         </page>
@@ -71,7 +89,7 @@
 
     <menuitem name="Outlet "
               id="menu_outlet_pos"
-              parent="point_of_sale.menu_point_root"
+              parent="point_of_sale.menu_point_of_sale"
               sequence="1"/>
 
     <menuitem name="Outlet Internal Transfer"

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="individualtimesheet_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <style>
+                        table{
+                        width: 100%;
+                        }
+                        div{
+                        margin-top:2px
+                        }
+                        table.border th {
+                        padding: 5px;
+                        }
+                        table.border td{
+                        padding: 5px;
+                        }
+                    </style>
+                    <div class="page">
+                        <div>
+                            <h1 style="text-align:center;">
+                                <center>
+                                    <span>Individual Timesheet Report</span>
+                                </center>
+                            </h1>
+                        </div>
+                        <br></br>
+
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 15%">
+                                    Employee Code :
+                                </td>
+                                <td style="width: 10%">
+                                    <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                </td>
+
+                                <td style="width: 10%">
+                                </td>
+
+                                <td style="width: 15%">
+                                    Department :
+                                </td>
+                                <td style="width: 10%">
+                                    <!--                                    <span t-esc="doc.to_shop_id.name"/>-->
+                                </td>
+                                <td style="width: 28%">
+                                </td>
+                            </tr>
+                            <br></br>
+                            <tr>
+                                <td style="width: 12%">
+                                    Employee name :
+                                </td>
+                                <td style=" width: 35%">
+                                    <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    Designation :
+                                </td>
+                                <td style=" width: 35%">
+                                    <!--                                    <span t-esc="doc.to_shop_id.name"/>-->
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <br></br>
+                        <br></br>
+
+                        <div>
+                            <table style="width: 100%">
+                                <tr class="text-center">
+                                    <th style="width:20%; border:1px solid black;">Date</th>
+                                    <th style="width:20%; border:1px solid black;">Day</th>
+                                    <th style="width:15%; border:1px solid black;">Check In</th>
+                                    <th style="width:15%; border:1px solid black;">Check out</th>
+                                    <th style="width:15%; border:1px solid black;">Late</th>
+                                    <th style="width:15%; border:1px solid black;">Absent</th>
+
+                                </tr>
+                                <t t-set="sr_no" t-value="0"/>
+                                <!--                                <t t-foreach="doc.outlet_internal_lines" t-as="line">-->
+                                <!--                                    <tr>-->
+                                <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                                <!--                                            <span t-esc="sr_no+1"/>-->
+                                <!--                                        </td>-->
+                                <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                                <!--                                            <span t-esc="line.product_id.name"/>-->
+                                <!--                                        </td>-->
+                                <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                                <!--                                            <span t-esc="line.quantity"/>-->
+                                <!--                                        </td>-->
+                                <!--                                        <td class="text-center" style="border:1px solid black;">-->
+                                <!--                                            <span t-esc="line.on_hand_quantity"/>-->
+                                <!--                                        </td>-->
+
+                                <!--                                    </tr>-->
+                                <!--                                </t>-->
+
+                            </table>
+                        </div>
+                        <br></br>
+                        <br></br>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <table style="width: 100% ; border: 2px solid black;">
+                                    <tr style="margin-top: 30px">
+                                        <td style="width: 30%">
+                                            Regularity % :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+
+                                       <tr style="margin-top: 30px">
+                                        <td style="width:30%">
+                                             Punctuality % :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+                                      <tr style="margin-top: 30px">
+                                        <td style="width: 30%">
+                                            Total Late days :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+                                      <tr style="margin-top: 30px">
+                                        <td style="width: 30%">
+                                             Total Absent :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+                                       <tr style="margin-top: 30px">
+                                        <td style="width: 30%">
+                                            Total Worked Hours :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+                                      <tr style="margin-top: 30px">
+                                        <td style="width: 30%">
+                                            Total Worked Hours :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+                                      <tr style="margin-top: 30px">
+                                        <td style="width: 30%">
+                                            Total Pay days :
+                                        </td>
+                                        <td style="width: 50%">
+                                        </td>
+                                        <td style="width: 20%">
+                                            <!--                                    <span t-esc="doc.from_shop_id.name"/>-->
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

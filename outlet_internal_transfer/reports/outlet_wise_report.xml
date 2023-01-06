@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="outlet_internal_transfer">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <style>
+                        table{
+                        width: 100%;
+                        }
+                        div{
+                        margin-top:2px
+                        }
+                        table.border th {
+                        padding: 5px;
+                        }
+                        table.border td{
+                        padding: 5px;
+                        }
+                    </style>
+                    <div class="page">
+                        <div>
+                            <h1 style="text-align:center;">
+                                <center>
+                                    <span style="border: 2px solid black;">Outlet Wise Report</span>
+                                </center>
+                            </h1>
+                        </div>
+
+                        <br></br>
+                        <br></br>
+
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 12%">
+                                    From Shop :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.from_shop_id.name"/>
+                                </td>
+
+                                <td style="width: 5%">
+                                </td>
+
+                                <td style="width: 12%">
+                                    To Shop :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 35%">
+                                    <span t-esc="doc.to_shop_id.name"/>
+                                </td>
+                            </tr>
+
+                            <tr style="padding-top:15px;">
+                                <td style="width: 10%">
+                                    Date :
+                                </td>
+                                <td style="border-bottom: 1px solid black; width: 40%">
+                                    <span t-esc="doc.date"/>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <br></br>
+                        <br></br>
+
+                        <div>
+                            <table>
+                                <tr class="text-center">
+                                    <th style="width:10%; border:1px solid black;">Sr:#</th>
+                                    <th style="width:30%; border:1px solid black;">Product</th>
+                                    <th style="width:15%; border:1px solid black;">Quantity.</th>
+                                    <th style="width:15%; border:1px solid black;">On hand Quantity</th>
+                                </tr>
+                                <t t-set="sr_no" t-value="0"/>
+                                <t t-foreach="doc.outlet_internal_lines" t-as="line">
+                                    <tr>
+                                        <td class="text-center" style="border:1px solid black;">
+                                            <span t-esc="sr_no+1"/>
+                                        </td>
+                                        <td class="text-center" style="border:1px solid black;">
+                                            <span t-esc="line.product_id.name"/>
+                                        </td>
+                                        <td class="text-center" style="border:1px solid black;">
+                                            <span t-esc="line.quantity"/>
+                                        </td>
+                                        <td class="text-center" style="border:1px solid black;">
+                                            <span t-esc="line.on_hand_quantity"/>
+                                        </td>
+
+                                    </tr>
+                                </t>
+
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

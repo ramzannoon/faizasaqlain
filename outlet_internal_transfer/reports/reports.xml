@@ -1,0 +1,50 @@
+<odoo>
+
+        <record id="paperformat_individual_time_sheet" model="report.paperformat">
+        <field name="name">Format Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="individual_time_sheet" string="Individual Time Sheet Report"
+            model="outlet.internal.transfer" report_type="qweb-pdf"
+            file="outlet_internal_transfer.individualtimesheet_template"
+            name="outlet_internal_transfer.individualtimesheet_template" menu="True"
+            paperformat="outlet_internal_transfer.paperformat_individual_time_sheet"/>
+
+
+
+    <record id="paperformat_outlet_wise_report" model="report.paperformat">
+        <field name="name">Format Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">50</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <report id="outlet_wise_report" string="Outlet Wise Report"
+            model="outlet.internal.transfer" report_type="qweb-pdf"
+            file="outlet_internal_transfer.outlet_internal_transfer"
+            name="outlet_internal_transfer.outlet_internal_transfer" menu="True"
+            paperformat="outlet_internal_transfer.paperformat_outlet_wise_report"/>
+</odoo>
