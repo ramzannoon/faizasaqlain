@@ -48,13 +48,13 @@
                 <field name="workingorder_id"/>
                 <field name="employee_id"/>
                 <field name="production_ids"/>
-                
+
                 <group expand="0" string="Group By">
                     <filter string="Work Order" name="group_workingorder_id" context="{'group_by':'workingorder_id'}"/>
                     <filter string="MRP" name="group_production_ids" context="{'group_by':'production_ids'}"/>
                     <filter string="Partner" name="group_employee_id" context="{'group_by':'employee_id'}"/>
                 </group>
-                
+
             </xpath>
         </field>
     </record>

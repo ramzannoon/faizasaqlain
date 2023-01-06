@@ -9,7 +9,6 @@
             <search string="Wip Reports">
                 <field name="name"/>
                 <field name="production_id"/>
-
                 <group expand="0" string="Group By">
                     <filter string="Work Order" name="group_name" context="{'group_by':'name'}"/>
                     <filter string="MRP" name="group_production_id" context="{'group_by':'production_id'}"/>

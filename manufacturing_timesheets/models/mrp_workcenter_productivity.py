@@ -1,4 +1,7 @@
+from pkg_resources import _
+
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError, UserError
 
 
 class MRPWorkcenterProductivit(models.Model):
@@ -33,6 +36,17 @@ class MRPWorkcenterProductivit(models.Model):
     def compute_actual_cost(self):
         for rec in self:
             rec.actual_cost = rec.duration
+
+
+            # if  data.write({'state': 'pending'}):
+
+
+    # def unlink(self):
+    #     for loan in self:
+    #         if loan.state not in ('draft', 'cancel'):
+    #             raise UserError(
+    #                 'You cannot delete a loan which is not in draft or cancelled state')
+    #     return super(HrLoan, self).unlink()
 
     def action_create_bill(self):
         vendor_list = []
@@ -71,6 +85,14 @@ class MRPWorkcenterProductivit(models.Model):
                 self.write({'status': 'paid'})
             move.action_post()
 
+
+    # @api.constrains('status')
+    # def _check_status(self):
+    #     for data in self:
+    #         if  data.state == 'paid':
+    #             raise ValidationError(_("Can not create Multiple Bills"))
+    #         else:
+    #             return
 
 
     def compute_duration(self):
