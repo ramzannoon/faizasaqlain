@@ -1,28 +1,43 @@
 from datetime import datetime
+from pkg_resources import _
 from odoo import models, fields, api
 
 
 class POSSaleTargets(models.Model):
     _name = 'pos.sale.targets'
-    _description = 'WIP Reports'
+    _description = 'Sale Target'
+    _rec_name = 'sale_person'
 
-    sale_person = fields.Many2one('res.users', string='Sale Person')
-    date_from = fields.Datetime(string="Date From")
-    date_to = fields.Datetime(string="Date To")
+    sale_person = fields.Many2one('res.users', string='Sale Person', required=True)
+    date_from = fields.Datetime(string="Date From", required=True)
+    sequence = fields.Char(string='Order Reference', required=True,
+                           readonly=True, default='New')
+
+    def _default_target_type(self):
+         return self.env['account.journal'].search([], limit=1).id
+
+    sale_targets_type = fields.Many2one('pos.sale.target.type', string='Targets Type',default=_default_target_type)
+    date_to = fields.Datetime(string="Date To", required=True)
     sale_target = fields.Float(string='Sale Target')
     amount_paid = fields.Float(string='Actual Sale', compute='_compute_get_commsion')
-    state = fields.Selection([('draft', 'Draft'),
+    state = fields.Selection([('draft', 'Draft'), ('in_progress', 'In Progress'),
                               ('posted', 'Posted'),
-                              ('cancel', 'Cancel')], string="State")
-    commission = fields.Float('Commission %', compute='_compute_commission', store=True)
+                              ('cancel', 'Cancel')], string="State",default='draft')
+    commission = fields.Float('Commission (%)', compute='_compute_commission', store=True)
 
     debit_invoice_id = fields.Many2one('account.account', string='Debit Invoice')
     credit_invoice_id = fields.Many2one('account.account', string='Credit Invoice')
     journal_id = fields.Many2one('account.journal')
-    employee_id = fields.Many2one('hr.employee', string="Employee", required=True, help="Employee")
     actual_amount = fields.Float('Commision Amount', compute='_compute_actual_amount', store=True)
-
     j_entry_id = fields.Many2one('account.move', string="Journal Entry", store=True)
+
+    @api.model
+    def create(self, vals):
+        if vals.get('sequence', 'New') == 'New':
+            vals['sequence'] = self.env['ir.sequence'].next_by_code(
+                'pos.sale.targets') or 'New'
+        res = super(POSSaleTargets, self).create(vals)
+        return res
 
     def button_journal_entry(self):
         f = 9
@@ -58,6 +73,8 @@ class POSSaleTargets(models.Model):
         for record in self:
             record.actual_amount = record.amount_paid * 100
 
+    def compute_sale(self):
+        self.state = 'in_progress'
 
     def action_draft(self):
         self.state = 'draft'
@@ -78,7 +95,7 @@ class POSSaleTargets(models.Model):
                     'amount_currency': 200.0,
                 }),
                              (0, 0, {
-                                 'account_id': 2,
+                                 'account_id': rec.debit_invoice_id.id,
                                  'partner_id': rec.sale_person.id,
                                  # 'currency_id': rec.currency_data_2['currency'].id,
                                  'debit': 0,
@@ -103,7 +120,18 @@ class POSSaleTargets(models.Model):
         }
 
 
-# class MRPWorkCenterRout(models.Model):
-#     _inherit = 'mrp.routing.workcenter'
-#
-#     rate_per_hour = fields.Float(string='Rate Per Hour')
+class MRPWorkCenterRout(models.Model):
+    _inherit = 'mrp.routing.workcenter'
+
+    rate_per_hour = fields.Float(string='Rate Per Hour')
+
+
+class POSSaleTargetsType(models.Model):
+    _name = 'pos.sale.target.type'
+    _description = 'Sale Target Type'
+    # _rec_name = 'sale_person'
+
+    name = fields.Char("Sale target type")
+    debit_invoice_id = fields.Many2one('account.account', string='Debit account')
+    credit_invoice_id = fields.Many2one('account.account', string='Credit account')
+    journal_id = fields.Many2one('account.journal')

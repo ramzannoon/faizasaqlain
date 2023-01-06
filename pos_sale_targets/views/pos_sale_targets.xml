@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!--    <record id="view_mrp_routing_workcenter_form" model="ir.ui.view">-->
-<!--        <field name="name">mrp.routing.workcenter.form</field>-->
-<!--        <field name="model">mrp.routing.workcenter</field>-->
-<!--        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//form/sheet/group/group/field[@name='name']" position="after">-->
-<!--                <field name="rate_per_hour"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
-
-
     <record id="view_mrp_bom_form" model="ir.ui.view">
         <field name="name">mrp.bom.form</field>
         <field name="model">mrp.bom</field>
         <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
         <field name="arch" type="xml">
-
             <xpath expr="//form/sheet/notebook/page[2]/field[@name='operation_ids']" position="replace">
                 <field name="operation_ids">
                     <tree string="POS Sale Targets">
@@ -58,17 +45,23 @@
         <field name="arch" type="xml">
             <form string="POS Sale Targets">
                 <header>
-                    <button name="action_draft" string="Draft" type='object' class="oe_highlight"
-                            attrs="{'invisible':[('state','=','posted')]}"/>
-                    <button name="action_posted" string="Posted" type='object' class="oe_highlight"
-                            attrs="{'invisible':[('state','=','cancel')]}"/>
+                    <!--                    <button name="action_draft" string="Draft" type='object' class="oe_highlight"-->
+                    <!--                            attrs="{'invisible':[('state','=','posted')]}"/>-->
+
+                    <button name="action_posted" string="Posted" type='object' class="oe_highlight" states="draft"
+                    />
                     <button name="action_cancel" string="Cancel" class="oe_highlight"
                             type='object'/>
-                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="posted,cancel,draft"
-                           statusbar_colors='{"posted":"red","draft":"red"}'/>
+                    <field name="state" widget="statusbar" nolabel="1"
+                           statusbar_visible="draft,in_progress,posted,cancel"
+                    />
+
+                    <button name="compute_sale" string="Compute" type='object' class="oe_highlight"/>
                 </header>
 
                 <sheet>
+
+
                     <div class="oe_button_box" name="button_box">
                         <button class=" oe_stat_button" name="button_sale_targets"
                                 type="object" string="Actual Sale" icon="fa-cubes">
@@ -78,13 +71,20 @@
                                 type="object" icon="fa-calendar" string="Journal Entry">
                         </button>
                     </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="sequence" readonly="1"/>
+                        </h1>
+                    </div>
+
                     <separator string="POS Sale Targets"/>
                     <group>
                         <group>
                             <field name="sale_person"/>
                             <field name="date_from"/>
                             <field name="sale_target"/>
-                            <field name="commission"/>
+                            <field name="sale_targets_type"/>
+                            <field name="commission" editable="True" create="True" readonly="0"/>
                             <field name="journal_id"/>
                             <field name="actual_amount"/>
                         </group>
@@ -111,5 +111,8 @@
 
     <menuitem id="menu_pos_sale_targets" name="POS Sale Targets" parent="point_of_sale.menu_point_of_sale" sequence="9"
               action="action_pos_sale_targets"/>
+
+
+    <!--point_of_sale.menu_pos_config_pos-->
 
 </odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_pos_sale_targets_type_tree" model="ir.ui.view">
+        <field name="name">pos.sale.target.type.tree</field>
+        <field name="model">pos.sale.target.type</field>
+        <field name="arch" type="xml">
+            <tree string="POS Sale Targets type">
+                <field name="name"/>
+                <field name="debit_invoice_id"/>
+                <field name="credit_invoice_id"/>
+                <field name="journal_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_sale_targets_type_form" model="ir.ui.view">
+        <field name="name">pos.sale.target.type.form</field>
+        <field name="model">pos.sale.target.type</field>
+        <field name="arch" type="xml">
+            <form string="POS Sale Targets type">
+                <sheet>
+                    <separator string="POS Sale Targets type"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="debit_invoice_id"/>
+
+                        </group>
+                        <group>
+                            <field name="credit_invoice_id"/>
+                            <field name="journal_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_pos_sale_targets_type" model="ir.actions.act_window">
+        <field name="name">Sale Target Type</field>
+        <field name="res_model">pos.sale.target.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_targets_type" name="Sale Targets Types" parent="point_of_sale.menu_pos_config_pos" sequence="11"
+              action="action_pos_sale_targets_type"/>
+
+
+    <!--point_of_sale.menu_pos_config_pos-->
+
+</odoo>

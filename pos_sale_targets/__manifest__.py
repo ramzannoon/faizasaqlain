@@ -10,11 +10,14 @@
         'base', 'point_of_sale'
     ],
     'data': [
+        'data/sequence.xml',
+        'security/pos_sale_targets_security.xml',
         'security/ir.model.access.csv',
         'views/pos_sale_targets.xml',
+        'views/target_type.xml',
+
         'reports/pos_sale_targets.xml',
         'reports/goods_receive_notes.xml',
-
         'reports/reports.xml',
     ],
     'installable': True,

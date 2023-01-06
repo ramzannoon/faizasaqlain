@@ -2,6 +2,8 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_pos_sale_targets,pos.sale.targets,model_pos_sale_targets,,1,1,1,1
 
+access_pos_sale_target_type,pos.sale.target.type,model_pos_sale_target_type,,1,1,1,1
+
 
 
 
