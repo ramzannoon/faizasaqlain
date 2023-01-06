@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+1,age.group,model_age_group,base.group_user,1,1,1,1
+2,calender.season,model_calender_season,base.group_user,1,1,1,1
+3,product.accessories,model_product_accessories,base.group_user,1,1,1,1
+4,product.component,model_product_component,base.group_user,1,1,1,1
+5,component.type,model_product_accessories,base.group_user,1,1,1,1
+6,product.year,model_product_year,base.group_user,1,1,1,1

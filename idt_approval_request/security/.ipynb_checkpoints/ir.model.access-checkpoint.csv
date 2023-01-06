@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_approver_line_admin,access.hr.approver.line,model_hr_approver_line,idt_approval_request.group_approval_request_admin,1,1,1,1
+access_hr_approval_request_admin,access.hr.approval.request,model_hr_approval_request,idt_approval_request.group_approval_request_admin,1,1,1,1
+access_category_approval_admin,access.category.approval,model_category_approval,idt_approval_request.group_approval_request_admin,1,1,1,1
+access_hr_category_approvers_admin,access.hr.category.approvers,model_hr_category_approvers,idt_approval_request.group_approval_request_admin,1,1,1,1
+access_hr_approver_line_readonly,access.hr.approver.line,model_hr_approver_line,idt_approval_request.group_approval_request_user,1,0,0,0
+access_hr_approval_request_readonly,access.hr.approval.request,model_hr_approval_request,idt_approval_request.group_approval_request_user,1,0,0,0
+access_category_approval_readonly,access.category.approval,model_category_approval,idt_approval_request.group_approval_request_user,1,0,0,0
+access_hr_category_approvers_readonly,access.hr.category.approvers,model_hr_category_approvers,idt_approval_request.group_approval_request_user,1,0,0,0
+access_hr_approver_line_portal,access.hr.approver.line,model_hr_approver_line,base.group_portal,1,1,1,1
+access_hr_approval_request_portal,access.hr.approval.request,model_hr_approval_request,base.group_portal,1,1,1,1
+access_category_approval_portal,access.category.approval,model_category_approval,base.group_portal,1,1,1,1
+access_hr_category_approvers_portal,access.hr.category.approvers,model_hr_category_approvers,base.group_portal,1,1,1,1

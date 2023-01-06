@@ -1,0 +1,26 @@
+<odoo>
+
+    <record id="view_product_template_form_inherit" model="ir.ui.view">
+        <field name="name">product.template.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_id']" position="before">
+                <field name="age_group_ids" widget="many2many_tags" options="{'no_quick_create': True, 'no_create': True, 'no_open': True}"/>
+                <field name="year_id" options="{'no_quick_create': True, 'no_create': True, 'no_open': True}"/>
+                <field name="design_name"/>
+                <field name="design_code"/>
+                <field name="collection_name"/>
+                <field name="sampling_code"/>
+                <field name="calender_season_ids" widget="many2many_tags" options="{'no_quick_create': True, 'no_create': True, 'no_open': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='barcode']" position="after">
+                <field name="product_gender"/>
+                <field name="accessories_ids" widget="many2many_tags" options="{'no_quick_create': True, 'no_create': True, 'no_open': True}"/>
+                <field name="components_ids" widget="many2many_tags" options="{'no_quick_create': True, 'no_create': True, 'no_open': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

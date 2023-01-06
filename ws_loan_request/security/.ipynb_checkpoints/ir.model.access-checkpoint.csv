@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_loan_admin,access.hr.loan,model_hr_loan,ws_loan_request.group_loan_request_admin,1,1,1,1
+access_hr_loan_type_admin,access.hr.loan.type,model_hr_loan_type,ws_loan_request.group_loan_request_admin,1,1,1,1
+access_hr_loan_line_admin,access.hr.loan.line,model_hr_loan_line,ws_loan_request.group_loan_request_admin,1,1,1,1
+access_hr_loan_readonly,access.hr.loan,model_hr_loan,ws_loan_request.group_loan_request_user,1,0,0,0
+access_hr_loan_type_readonly,access.hr.loan.type,model_hr_loan_type,ws_loan_request.group_loan_request_user,1,0,0,0
+access_hr_loan_line_readonly,access.hr.loan.line,model_hr_loan_line,ws_loan_request.group_loan_request_user,1,0,0,0
+access_advance_against_expense,access.advance.against.expense,model_advance_against_expense,ws_loan_request.group_advance_against_expense,1,1,1,1
+access_hr_loan_portal,access.hr.loan,model_hr_loan,base.group_portal,1,1,1,1
+access_hr_loan_type_portal,access.hr.loan.type,model_hr_loan_type,base.group_portal,1,1,1,1
+access_hr_loan_line_portal,access.hr.loan.line,model_hr_loan_line,base.group_portal,1,1,1,1
